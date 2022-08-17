@@ -1,0 +1,32 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\PC-JAOR\Documentos\Documents\NetBeansProjects\CursoJavaNetBeans7_0\dist\CursoJavaNetBeans7_0.jar</jar>
+  <outfile>C:\Users\PC-JAOR\Documentos\Documents\NetBeansProjects\CursoJavaNetBeans7_0\EXE_2\JaorPos.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>C:\Users\PC-JAOR\Documentos\Documents\NetBeansProjects\CursoJavaNetBeans7_0\jaorsoftware_ico.ico</icon>
+  <singleInstance>
+    <mutexName>MuxJaorPos</mutexName>
+    <windowTitle>Instance Title</windowTitle>
+  </singleInstance>
+  <jre>
+    <path>C:\Program Files\Java\jre7</path>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+  <splash>
+    <file>C:\Users\PC-JAOR\Documentos\Documents\NetBeansProjects\CursoJavaNetBeans7_0\jaorsoftware_logo.bmp</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>true</timeoutErr>
+  </splash>
+</launch4jConfig>

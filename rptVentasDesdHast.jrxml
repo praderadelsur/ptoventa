@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 5.5.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVentas2" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="081ddd2b-68e3-4c49-b8ae-704f5d013b8e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Fecha1" class="java.lang.String"/>
+	<parameter name="Fecha2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     08tblventas.`intVentaFolio` AS 08tblventas_intVentaFolio,
+     DATE(08tblventas.`dateVentaFecha`) AS 08tblventas_dateVentaFecha,
+     08tblventas.`intVentaProductos` AS 08tblventas_intVentaProductos,
+     08tblventas.`decVentaImporte` AS 08tblventas_decVentaImporte,
+     08tblventas.`decVentaUtilidad` AS 08tblventas_decVentaUtilidad,
+     08tblventas.`strVentaFormaPago` AS 08tblventas_strVentaFormaPago
+FROM
+     `08tblventas` 08tblventas
+WHERE
+    08tblventas.`dateVentaFecha` >= $P{Fecha1}
+AND
+    08tblventas.`dateVentaFecha` <= $P{Fecha2}
+AND
+   08tblventas.strVentaCancelada =""]]>
+	</queryString>
+	<field name="08tblventas_intVentaFolio" class="java.lang.Long"/>
+	<field name="08tblventas_dateVentaFecha" class="java.sql.Date"/>
+	<field name="08tblventas_intVentaProductos" class="java.lang.Long"/>
+	<field name="08tblventas_decVentaImporte" class="java.math.BigDecimal"/>
+	<field name="08tblventas_decVentaUtilidad" class="java.math.BigDecimal"/>
+	<field name="08tblventas_strVentaFormaPago" class="java.lang.String"/>
+	<variable name="08tblventas_decVentaImporte_1" class="java.math.BigDecimal" resetType="Group" resetGroup="ByFecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></variableExpression>
+	</variable>
+	<variable name="08tblventas_decVentaUtilidad_1" class="java.math.BigDecimal" resetType="Group" resetGroup="ByFecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaUtilidad}]]></variableExpression>
+	</variable>
+	<variable name="TotalImporte" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></variableExpression>
+	</variable>
+	<variable name="TotalUtilidad" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaUtilidad}]]></variableExpression>
+	</variable>
+	<group name="ByFecha">
+		<groupExpression><![CDATA[$F{08tblventas_dateVentaFecha}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<staticText>
+					<reportElement x="0" y="0" width="43" height="20" uuid="2f6ff7bf-1d37-4324-92a4-45a38e777705"/>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="85" y="0" width="33" height="20" uuid="375bff28-23e6-4e6a-826d-0a2e6a16fa8a"/>
+					<text><![CDATA[Ticket]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="150" y="0" width="182" height="20" uuid="56bf9c5e-9a1e-48be-a6bd-b851222a7c79"/>
+					<text><![CDATA[Forma de Pago]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="0" width="100" height="20" uuid="4278ee42-1017-496a-8f20-dd1609b257df"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Importe]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<textField>
+					<reportElement x="360" y="0" width="100" height="20" uuid="e956f702-55d4-408e-8999-fbcadc164cf9"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{08tblventas_decVentaImporte_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="168" y="0" width="224" height="33" uuid="0f00bbb0-d105-4b9f-90a3-ff8f93762a9d"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Pradera del Sur]]></text>
+			</staticText>
+			<image>
+				<reportElement x="11" y="18" width="48" height="33" uuid="36520d71-f9f3-44ea-9ae3-d5fbe8d61440"/>
+				<imageExpression><![CDATA["C:\\Users\\PC-JAOR\\Documentos\\Documents\\NetBeansProjects\\CursoJavaNetBeans7_0\\jsw.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="447" y="18" width="125" height="20" uuid="182ef023-4f9e-482e-9ce7-72a66ceede98"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="168" y="38" width="224" height="20" forecolor="#006699" uuid="843f4c2a-beab-4961-aaa0-18adbac17242"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Ventas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="59" height="20" uuid="b43f1b84-d9f1-4549-ae6f-779e2482a759"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Del Día:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="0" width="44" height="20" uuid="9edf93b1-8504-4601-baff-164d9540c26a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Al Día:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="0" width="100" height="20" uuid="ddd33b77-5247-41a6-9ed3-13d7d13329a5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fecha1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="0" width="100" height="20" uuid="d6a3ea75-7b49-4d4c-9c3b-61dd4934a444"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fecha2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="42" height="20" uuid="967260e5-316d-41c4-9194-99e37ae9a810"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_dateVentaFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="0" width="33" height="20" uuid="fceec938-7835-4bd8-89fb-e3e71b58f139"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_intVentaFolio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="0" width="186" height="20" uuid="0b92d2ec-a46d-4c22-901f-731db21272df"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_strVentaFormaPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="100" height="20" uuid="b5e3a631-824c-449d-8574-a457592cbd03"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement x="360" y="0" width="100" height="20" uuid="bdd02bd0-072f-43ff-aff9-a2c8d3f50136"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalImporte}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="0" width="149" height="20" uuid="dd9d086c-3b06-4069-9035-bab7a27a6efa"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales del Reporte]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptVentas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Fecha1" class="java.lang.String"/>
+	<parameter name="Fecha2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     08tblventas.`intVentaFolio` AS 08tblventas_intVentaFolio,
+     DATE(08tblventas.`dateVentaFecha`) AS 08tblventas_dateVentaFecha,
+     08tblventas.`intVentaProductos` AS 08tblventas_intVentaProductos,
+     08tblventas.`decVentaImporte` AS 08tblventas_decVentaImporte,
+     08tblventas.`decVentaUtilidad` AS 08tblventas_decVentaUtilidad,
+     08tblventas.`strVentaFormaPago` AS 08tblventas_strVentaFormaPago
+FROM
+     `08tblventas` 08tblventas
+
+WHERE
+     08tblventas.dateVentaFecha >= $P{Fecha1}
+AND
+     08tblventas.dateVentaFecha <= $P{Fecha2}]]>
+	</queryString>
+	<field name="08tblventas_intVentaFolio" class="java.lang.Long"/>
+	<field name="08tblventas_dateVentaFecha" class="java.sql.Date"/>
+	<field name="08tblventas_intVentaProductos" class="java.lang.Long"/>
+	<field name="08tblventas_decVentaImporte" class="java.math.BigDecimal"/>
+	<field name="08tblventas_decVentaUtilidad" class="java.math.BigDecimal"/>
+	<field name="08tblventas_strVentaFormaPago" class="java.lang.String"/>
+	<variable name="08tblventas_decVentaImporte_1" class="java.math.BigDecimal" resetType="Group" resetGroup="ByFecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></variableExpression>
+	</variable>
+	<variable name="08tblventas_decVentaUtilidad_1" class="java.math.BigDecimal" resetType="Group" resetGroup="ByFecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaUtilidad}]]></variableExpression>
+	</variable>
+	<variable name="TotalImporte" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></variableExpression>
+	</variable>
+	<variable name="TotalUtilidad" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{08tblventas_decVentaUtilidad}]]></variableExpression>
+	</variable>
+	<group name="ByFecha">
+		<groupExpression><![CDATA[$F{08tblventas_dateVentaFecha}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<staticText>
+					<reportElement x="0" y="0" width="76" height="20"/>
+					<textElement/>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="88" y="0" width="38" height="20"/>
+					<textElement/>
+					<text><![CDATA[Ticket]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="139" y="0" width="173" height="20"/>
+					<textElement/>
+					<text><![CDATA[Forma de Pago]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Importe]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="472" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Utilidad]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28">
+				<textField>
+					<reportElement x="354" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{08tblventas_decVentaImporte_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="472" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{08tblventas_decVentaUtilidad_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="139" y="0" width="298" height="36"/>
+				<textElement textAlignment="Center">
+					<font fontName="Lucida Sans" size="24"/>
+				</textElement>
+				<text><![CDATA[Pradera del Sur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="46" width="298" height="20" forecolor="#006699"/>
+				<textElement textAlignment="Center">
+					<font fontName="Lucida Sans" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Ventas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="1" width="45" height="45"/>
+				<imageExpression><![CDATA["C:\\Users\\c.clagom\\git\\jaorPOS\\jsw.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="454" y="12" width="118" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="46" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Del Día:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="1" width="43" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Al Día:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="46" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fecha1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Lucida Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fecha2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="45" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{08tblventas_dateVentaFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="0" width="38" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{08tblventas_intVentaFolio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="0" width="173" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{08tblventas_strVentaFormaPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_decVentaImporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{08tblventas_decVentaUtilidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="354" y="0" width="100" height="31"/>
+				<textElement textAlignment="Right">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalImporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="0" width="100" height="31"/>
+				<textElement textAlignment="Right">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalUtilidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="188" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales del Reporte]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

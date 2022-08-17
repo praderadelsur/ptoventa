@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptProcesos" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Mon Apr 23 17:02:42 CDT 2012"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     01tblusers.`strUserIde` AS 01tblusers_strUserIde,
+     01tblusers.`strUserPass` AS 01tblusers_strUserPass,
+     01tblusers.`strUserName` AS 01tblusers_strUserName,
+     01tblusers.`strRoleName` AS 01tblusers_strRoleName
+FROM
+     `01tblusers` 01tblusers]]>
+	</queryString>
+	<field name="01tblusers_strUserIde" class="java.lang.String"/>
+	<field name="01tblusers_strUserPass" class="java.lang.String"/>
+	<field name="01tblusers_strUserName" class="java.lang.String"/>
+	<field name="01tblusers_strRoleName" class="java.lang.String"/>
+	<variable name="UsersByPage" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{01tblusers_strUserIde}]]></variableExpression>
+	</variable>
+	<variable name="UsersByReport" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{01tblusers_strUserIde}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="166" y="19" width="241" height="28"/>
+				<textElement>
+					<font fontName="Lucida Sans" size="18"/>
+				</textElement>
+				<text><![CDATA[Pradera del Sur]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="472" y="47" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="24" y="7" width="36" height="47"/>
+				<imageExpression><![CDATA["C:\\Users\\c.clagom\\git\\jaorPOS\\jsw.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="4" width="249" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font fontName="Lucida Sans" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Usuarios del Sistema]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="11" y="8" width="100" height="20" forecolor="#0033FF" backcolor="#CCCCCC"/>
+				<box leftPadding="5">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ide]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="166" y="9" width="100" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Password]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="326" y="10" width="100" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="10" width="100" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Role]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="100" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{01tblusers_strUserIde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="2" width="100" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{01tblusers_strUserPass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="2" width="100" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{01tblusers_strUserName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="2" width="100" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{01tblusers_strRoleName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="11" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Página Número:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="34" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de Páginas:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="112" y="34" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{UsersByPage}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="11" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Usuarios por Página:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="31" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de Usuarios:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="459" y="31" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{UsersByReport}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
